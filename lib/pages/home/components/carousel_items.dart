@@ -25,7 +25,7 @@ List<CarouselItemModel> carouselItems(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "Mobile Application Developer",
+                      "Full-Stack Developer",
                       style: GoogleFonts.josefinSans(
                         color: kPrimaryColor,
                         fontWeight: FontWeight.w900,
@@ -37,7 +37,8 @@ List<CarouselItemModel> carouselItems(
                       height: 18.0,
                     ),
                     Text(
-                      "Agnel Selvan".toUpperCase(),
+                      "Anuroop Farkya".toUpperCase(),
+                      // "Agnel Selvan".toUpperCase(),
                       style: GoogleFonts.josefinSans(
                         fontSize: 40.0,
                         fontWeight: FontWeight.w900,
@@ -70,7 +71,7 @@ List<CarouselItemModel> carouselItems(
                           width: 2,
                         ),
                         Text(
-                          "Mumbai",
+                          "Indore",
                           style: TextStyle(
                             color: kCaptionColor,
                             fontSize: 15.0,
@@ -156,7 +157,7 @@ List<CarouselItemModel> carouselItems(
         ),
         image: Container(
           child:
-              SvgPicture.asset(AppConstants.guySvg, semanticsLabel: 'Guy Logo'),
+              SvgPicture.asset(AppConstants.guySvg, semanticsLabel: 'Guy Logo',),
         ),
       ),
     );

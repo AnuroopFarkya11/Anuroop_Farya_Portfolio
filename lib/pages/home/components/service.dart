@@ -37,8 +37,8 @@ class ServiceSection extends StatelessWidget {
       color: Colors.green[400]!,
     ),
     NameIconColor(
-      title: "Web Development",
-      iconData: Icons.web,
+      title: "Backend Development",
+      iconData: Icons.account_tree_outlined,
       color: Colors.yellow[400]!,
     ),
     NameIconColor(
@@ -47,10 +47,11 @@ class ServiceSection extends StatelessWidget {
       color: Colors.blue[400]!,
     ),
     NameIconColor(
-      title: "Github Open Source",
+      title: "Github Open\nSource",
       iconData: Icons.code,
       color: Colors.orange[400]!,
     ),
+
   ];
 
   @override

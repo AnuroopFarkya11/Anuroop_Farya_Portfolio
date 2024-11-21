@@ -19,14 +19,14 @@ class _JsonToDartScreenState extends ConsumerState<JsonToDartScreen> {
   TextEditingController classNameController = TextEditingController();
   TextEditingController controller = TextEditingController();
   String output = "";
-  late AmplitutdeProvider _amplitutdeProvider;
+  // late AmplitutdeProvider _amplitutdeProvider;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      _amplitutdeProvider = ref.read(amplitudeProvider);
-      await _amplitutdeProvider.logStartupEvent();
-      await _amplitutdeProvider.logAScreen("json_to_dart");
+      // _amplitutdeProvider = ref.read(amplitudeProvider);
+      // await _amplitutdeProvider.logStartupEvent();
+      // await _amplitutdeProvider.logAScreen("json_to_dart");
     });
     super.initState();
   }
@@ -122,7 +122,7 @@ class _JsonToDartScreenState extends ConsumerState<JsonToDartScreen> {
         "error": e.toString(),
         "json": controller.text,
       };
-      _amplitutdeProvider.logJsonParseError(json);
+      // _amplitutdeProvider.logJsonParseError(json);
     }
   }
 

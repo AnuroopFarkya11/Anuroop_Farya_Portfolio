@@ -47,7 +47,7 @@ class _AboutSectionState extends State<AboutSection> {
                         height: 15.0,
                       ),
                       Text(
-                        "About Me",
+                        "Hey, there!",
                         style: GoogleFonts.josefinSans(
                           fontWeight: FontWeight.w900,
                           height: 1.3,
@@ -58,7 +58,7 @@ class _AboutSectionState extends State<AboutSection> {
                         height: 25.0,
                       ),
                       Text(
-                        "I'm Agnel Selvan, A Flutter and iOS Developer and Technical Blog Writer",
+                        "I'm Anuroop Farkya, A Flutter and iOS Developer and Technical Blog Writer",
                         style: GoogleFonts.josefinSans(
                           fontWeight: FontWeight.bold,
                           height: 1.3,
@@ -69,7 +69,7 @@ class _AboutSectionState extends State<AboutSection> {
                         height: 10.0,
                       ),
                       const Text(
-                        "I have done my Computer Science graduation at Xavier's Institute of Engineering on 2021. I have been developing Mobile Apps for more than 1 years now. I have worked as a Team and as an Indivual in various organization and launched the apps in Playstore as well as in Appstore. In my free time I use to write Technical Blog in Medium. Always love to learn new technologies and to succeed in an environment of growth and excellence and earn a job which provides me job satisfaction and self-development and help me achieve personal as well as organisational goals.",
+                        "I am a goal-oriented individual who works harder, adapt, and function well in a team. I can also commit to projects and complete them well under time constraints. I perform best in a group environment and am constantly goal-oriented to provide solutions.",
                         style: TextStyle(
                           color: kCaptionColor,
                           height: 1.5,
@@ -92,7 +92,7 @@ class _AboutSectionState extends State<AboutSection> {
                       Consumer(builder: (context, ref, _) {
                         return ScrollConfiguration(
                           behavior: ScrollConfiguration.of(context)
-                              .copyWith(scrollbars: false),
+                              .copyWith(scrollbars: true),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(

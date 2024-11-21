@@ -65,8 +65,11 @@ class _DemoScreenState extends ConsumerState<MyWorksScreen> {
                     )
                   ],
                 )),
-                WorkSection(
-                  projects: ProjectModel.projects,
+                Visibility(
+
+                  child: WorkSection(
+                    projects: ProjectModel.projects,
+                  ),
                 ),
                 const Footer()
               ],

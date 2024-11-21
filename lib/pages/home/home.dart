@@ -32,18 +32,18 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home>
     with SingleTickerProviderStateMixin {
   late HomeProvider _homeProvider;
-  late AmplitutdeProvider _amplitutdeProvider;
+  // late AmplitutdeProvider _amplitutdeProvider;
   final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     _homeProvider = ref.read(homeProvider);
-    _amplitutdeProvider = ref.read(amplitudeProvider);
+    // _amplitutdeProvider = ref.read(amplitudeProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       Timer(const Duration(seconds: 2), () async {
-        _amplitutdeProvider.logStartupEvent();
-        await _amplitutdeProvider.logAScreen("home");
+        // _amplitutdeProvider.logStartupEvent();
+        // await _amplitutdeProvider.logAScreen("home");
       });
     });
     super.initState();
@@ -120,7 +120,7 @@ class _HomeState extends ConsumerState<Home>
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "View All",
+                              "",
                               style: GoogleFonts.josefinSans(
                                 color: kPrimaryColor,
                                 fontWeight: FontWeight.w700,
@@ -137,8 +137,11 @@ class _HomeState extends ConsumerState<Home>
                     )
                   ],
                 )),
-                ProjectSection(
-                  projects: ProjectModel.projects.take(4).toList(),
+                Visibility(
+                  visible: false,
+                  child: ProjectSection(
+                    projects: ProjectModel.projects.take(4).toList(),
+                  ),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 28.0),

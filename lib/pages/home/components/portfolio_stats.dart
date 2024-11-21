@@ -6,8 +6,8 @@ import 'package:my_portfolio/models/stat.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 final List<Stat> stats = [
-  Stat(count: "5+", text: "Projects"),
-  Stat(count: "4", text: "Awards"),
+  Stat(count: "20+", text: "Projects"),
+  // Stat(count: "4", text: "Awards"),
   Stat(
       count: (DateTime.now().year - 2021).toString(),
       text: "Years\nExperience"),
