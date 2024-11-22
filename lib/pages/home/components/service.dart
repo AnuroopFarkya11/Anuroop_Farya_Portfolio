@@ -28,8 +28,42 @@ final List<DesignProcess> designProcesses = [
   ),
 ];
 
-class ServiceSection extends StatelessWidget {
+class ServiceSection extends StatefulWidget {
   ServiceSection({Key? key}) : super(key: key);
+
+  @override
+  State<ServiceSection> createState() => _ServiceSectionState();
+}
+
+class _ServiceSectionState extends State<ServiceSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1), // Full bounce cycle duration
+    );
+
+    _scaleAnimation =
+        Tween<double>(begin: 1.0, end: 1.2).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ));
+
+    _controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   final whatIDo = [
     NameIconColor(
       title: "Mobile App Development",
@@ -51,7 +85,6 @@ class ServiceSection extends StatelessWidget {
       iconData: Icons.code,
       color: Colors.orange[400]!,
     ),
-
   ];
 
   @override
@@ -93,22 +126,27 @@ class ServiceSection extends StatelessWidget {
                   //https://github.com/AnuroopFarkya11/portfolio/tree/main/assets/assets
                 },
                 child: MouseRegion(
-
                   cursor: SystemMouseCursors.click,
-                  child: Text(
-                    "DOWNLOAD CV",
-                    style: GoogleFonts.josefinSans(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 16.0,
+                  child: ScaleTransition(
+                    scale: _scaleAnimation,
+                    child: Text(
+                      "DOWNLOAD CV",
+                      style: GoogleFonts.josefinSans(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
                 ),
               ),
             ],
           ),
-          ScreenHelper.isDesktop(context)?const SizedBox(height: 50,):const SizedBox.shrink(),
-
+          ScreenHelper.isDesktop(context)
+              ? const SizedBox(
+                  height: 50,
+                )
+              : const SizedBox.shrink(),
           const SizedBox(
             height: 20,
           ),

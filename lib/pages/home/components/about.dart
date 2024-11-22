@@ -159,11 +159,20 @@ class _AboutSectionState extends State<AboutSection> {
                   Expanded(
                     flex: constraints.maxWidth > 720.0 ? 1 : 0,
                     child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
                         radius: constraints.maxWidth > 720.0 ? 250.0 : null,
-                        backgroundImage: NetworkImage(
+                        backgroundImage: const NetworkImage(
                           "https://avatars.githubusercontent.com/u/96327302?v=4",
                           // width: constraints.maxWidth > 720.0 ? null : 350.0,
-                        )),
+                        ),
+                        onBackgroundImageError: (_, __) => debugPrint('Image load error'),
+                    /*    child: SvgPicture.asset(
+                          AppConstants.personSvg,
+                          width: constraints.maxWidth > 720.0 ? null : 350.0,
+                        )*/
+
+
+                    ),
                     /*child: SvgPicture.asset(
                       AppConstants.personSvg,
                       width: constraints.maxWidth > 720.0 ? null : 350.0,
