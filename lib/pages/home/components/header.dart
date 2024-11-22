@@ -99,7 +99,7 @@ class HeaderRow extends StatelessWidget {
         NameOnTap(
           title: "Themes",
           onTap: () {
-            Utilty.openUrl(AppConstants.mediumUrl);
+            // Utilty.openUrl(AppConstants.mediumUrl);
           },
           iconData: Icons.light_mode_outlined,
           isDarkTheme: true,

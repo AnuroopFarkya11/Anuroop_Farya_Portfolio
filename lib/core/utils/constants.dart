@@ -16,10 +16,10 @@ double getMobileMaxWidth(BuildContext context) =>
 
 class AppConstants {
   static const linkedInUrl =
-      "https://www.linkedin.com/in/agnel-selvan-328421192/";
-  static const instagramUrl = "https://www.instagram.com/_agnel.selvan_/";
-  static const githubUrl = "https://github.com/AgnelSelvan";
-  static const mediumUrl = "https://medium.com/@agnelselvan";
+      "https://www.linkedin.com/in/anuroopfarkya/";
+  static const instagramUrl = "https://www.instagram.com/anuroop_farkya/";
+  static const githubUrl = "https://github.com/AnuroopFarkya11";
+  // static const mediumUrl = "https://medium.com/@agnelselvan";
 
   static const _assets = "assets/";
   static const _outputs = "outputs/";
@@ -87,11 +87,11 @@ class AppConstants {
         onTap: () {
           Utilty.openUrl(githubUrl);
         }),
-    NameOnTap(
+   /* NameOnTap(
         title: "Medium",
         iconData: FontAwesomeIcons.medium,
         onTap: () {
           Utilty.openUrl(mediumUrl);
-        }),
+        }),*/
   ];
 }
