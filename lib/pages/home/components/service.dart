@@ -128,7 +128,7 @@ class ServiceSection extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: ScreenHelper.isDesktop(context) ? 140 : 70,
+            height: ScreenHelper.isDesktop(context) ? 100 : 70,
           ),
           Consumer(builder: (context, ref, _) {
             return Wrap(
