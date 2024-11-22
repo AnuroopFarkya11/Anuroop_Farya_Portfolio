@@ -102,7 +102,7 @@ class HeaderRow extends StatelessWidget {
             // Utilty.openUrl(AppConstants.mediumUrl);
           },
           iconData: Icons.light_mode_outlined,
-          isDarkTheme: true,
+          isDarkTheme: false,
         ),
       ];
 
