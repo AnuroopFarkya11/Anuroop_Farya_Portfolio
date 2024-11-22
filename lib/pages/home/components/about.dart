@@ -158,10 +158,16 @@ class _AboutSectionState extends State<AboutSection> {
                     ScreenHelper.isTablet(context))
                   Expanded(
                     flex: constraints.maxWidth > 720.0 ? 1 : 0,
-                    child: SvgPicture.asset(
+                    child: CircleAvatar(
+                        radius: constraints.maxWidth > 720.0 ? 250.0 : null,
+                        backgroundImage: NetworkImage(
+                          "https://avatars.githubusercontent.com/u/96327302?v=4",
+                          // width: constraints.maxWidth > 720.0 ? null : 350.0,
+                        )),
+                    /*child: SvgPicture.asset(
                       AppConstants.personSvg,
                       width: constraints.maxWidth > 720.0 ? null : 350.0,
-                    ),
+                    ),*/
                   ),
               ],
             ),

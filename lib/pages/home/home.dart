@@ -71,6 +71,7 @@ class _HomeState extends ConsumerState<Home>
                 AboutSection(
                   key: _homeProvider.aboutKey,
                 ),
+                ScreenHelper.isDesktop(context)?const SizedBox(height: 50,):const SizedBox.shrink(),
                 ServiceSection(
                   key: _homeProvider.servicesKey,
                 ),

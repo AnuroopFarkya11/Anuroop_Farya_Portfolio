@@ -93,6 +93,7 @@ class ServiceSection extends StatelessWidget {
                   //https://github.com/AnuroopFarkya11/portfolio/tree/main/assets/assets
                 },
                 child: MouseRegion(
+
                   cursor: SystemMouseCursors.click,
                   child: Text(
                     "DOWNLOAD CV",
@@ -106,6 +107,8 @@ class ServiceSection extends StatelessWidget {
               ),
             ],
           ),
+          ScreenHelper.isDesktop(context)?const SizedBox(height: 50,):const SizedBox.shrink(),
+
           const SizedBox(
             height: 20,
           ),
