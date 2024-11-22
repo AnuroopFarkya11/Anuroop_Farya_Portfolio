@@ -89,13 +89,13 @@ class HeaderRow extends StatelessWidget {
           onTap: () {},
           iconData: Icons.contact_mail,
         ),
-        NameOnTap(
+        /*NameOnTap(
           title: "Blogs",
           onTap: () {
             Utilty.openUrl(AppConstants.mediumUrl);
           },
           iconData: Icons.article,
-        ),
+        ),*/
         NameOnTap(
           title: "Themes",
           onTap: () {
@@ -134,7 +134,7 @@ class HeaderRow extends StatelessWidget {
                               child: Text(
                                 item.title,
                                 style: TextStyle(
-                                  color: item.title == "Blogs"
+                                  color: item.title == "Contact"
                                       ? kPrimaryColor
                                       : null,
                                   fontSize: 14.0,
