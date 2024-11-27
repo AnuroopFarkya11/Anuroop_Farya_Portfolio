@@ -26,7 +26,31 @@ class ProjectModel {
     this.links,
   });
 
-  static List<ProjectModel> projects = [
+  static List<ProjectModel> projects =
+  [
+
+    ProjectModel(
+      project: "Flutter App",
+      title: "KuChat",
+      description:
+      "My first Flutter project",
+      appPhotos: AppConstants.smartStoreImage,
+      projectLink: "https://github.com/AgnelSelvan/Smart-Store-Mobile-App",
+      techUsed: [
+        TechnologyConstants.flutter,
+        TechnologyConstants.firebase,
+        TechnologyConstants.flask,
+        TechnologyConstants.python,
+        TechnologyConstants.razorPay
+      ],
+      buttonText: "Github Link",
+    )
+
+
+
+  ];
+
+/*  static List<ProjectModel> projects = [
     ProjectModel(
       project: "Flutter Package",
       title: "UPI QRCode Generator",
@@ -149,7 +173,7 @@ class ProjectModel {
         TechnologyConstants.python,
       ],
     ),
-  ];
+  ];*/
 
   static List<ProjectModel> demos = [
     ProjectModel(

@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_portfolio/models/header_item.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
 import 'package:my_portfolio/core/utils/utils.dart';
+
+import '../core/service/api_service/api_service.dart';
 
 final homeProvider = ChangeNotifierProvider((ref) => HomeProvider());
 
@@ -12,6 +17,7 @@ class HomeProvider extends ChangeNotifier {
   final servicesKey = GlobalKey();
   final aboutKey = GlobalKey();
   final homeKey = GlobalKey();
+  final Dio dio = Dio();
 
   Future<void> scrollToContact() async {
     final context = contactKey.currentContext;
@@ -63,4 +69,28 @@ class HomeProvider extends ChangeNotifier {
       Utilty.openUrl(AppConstants.mediumUrl);
     }*/
   }
+
+  Future<void> fetchReadme() async {
+    final url = 'https://api.github.com/repos/AnuroopFarkya11/KuChat_ChatApp/readme';
+    final response = await DioClient(dio: dio).get(url);
+
+    if (response.isSuccess) {
+      final data = response.data;
+      final contentBase64 = data['content'];
+      final sanitizedBase64 = contentBase64.replaceAll(RegExp(r'\s'), '');
+      try{
+        final decodedContent = utf8.decode(base64.decode(sanitizedBase64));
+        print("Decoded" + decodedContent);
+
+      }
+      catch(e)
+      {
+        print("$e");
+      }
+
+    } else {
+      print("Failed to retrieve");
+    }
+  }
+
 }

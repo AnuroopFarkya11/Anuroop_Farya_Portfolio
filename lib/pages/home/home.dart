@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class _HomeState extends ConsumerState<Home>
     super.initState();
   }
 
+
   Widget _buildPage() {
     return Stack(
       children: [
@@ -86,9 +88,9 @@ class _HomeState extends ConsumerState<Home>
                   children: [
                     GestureDetector(
                       onTap: () {
-                        context.goNamed(
-                          Routes.simulation,
-                        );
+                        // context.goNamed(
+                        //   Routes.simulation,
+                        // );
                       },
                       child: Text(
                         "My Works",
@@ -121,7 +123,7 @@ class _HomeState extends ConsumerState<Home>
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "",
+                              "View all",
                               style: GoogleFonts.josefinSans(
                                 color: kPrimaryColor,
                                 fontWeight: FontWeight.w700,
@@ -138,11 +140,8 @@ class _HomeState extends ConsumerState<Home>
                     )
                   ],
                 )),
-                Visibility(
-                  visible: false,
-                  child: ProjectSection(
-                    projects: ProjectModel.projects.take(4).toList(),
-                  ),
+                ProjectSection(
+                  projects: ProjectModel.projects.take(4).toList(),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 28.0),
