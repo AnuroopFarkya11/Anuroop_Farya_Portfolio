@@ -7,6 +7,7 @@ import 'package:my_portfolio/core/logger/logger.dart';
 import 'package:my_portfolio/models/header_item.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
 import 'package:my_portfolio/core/utils/utils.dart';
+import 'package:my_portfolio/models/project.dart';
 
 import '../core/service/api_service/api_service.dart';
 
@@ -79,6 +80,14 @@ class HomeProvider extends ChangeNotifier {
     if (response.isSuccess) {
       final data = response.data;
       _logger.log(data);
+      try
+      {
+        ProjectModel model = ProjectModel.fromJson(jsonDecode(data));
+      }
+      catch(e,s)
+      {
+        _logger.log(e.toString() + s.toString());
+      }
    /*   final contentBase64 = data['content'];
       final sanitizedBase64 = contentBase64.replaceAll(RegExp(r'\s'), '');
       try{

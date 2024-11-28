@@ -25,7 +25,6 @@ class DioClient {
 
     // _dio.options.headers = {
     //   'Content-Type': 'application/json',
-    //   'Authorization': _basicAuth()
     // };
 
     _dio.interceptors.addAll([

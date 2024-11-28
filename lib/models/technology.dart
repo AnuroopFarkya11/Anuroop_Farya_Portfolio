@@ -1,10 +1,21 @@
 import 'package:my_portfolio/core/utils/constants.dart';
+import 'package:responsive_framework/responsive_value.dart';
 
 class TechnologyModel {
   final String name;
   final String logo;
 
   TechnologyModel(this.name, this.logo);
+
+  static List<TechnologyModel> jsonToList(List<dynamic> list) {
+    List<TechnologyModel> tech = [];
+    for (String s in list) {
+      TechnologyModel? model = TechnologyConstants.technologyLearned
+          .firstWhere((e) => e.name.toLowerCase().contains(s.toLowerCase()),orElse: () => TechnologyModel(s, ""));
+      tech.add(model);
+    }
+    return tech;
+  }
 }
 
 class TechnologyConstants {

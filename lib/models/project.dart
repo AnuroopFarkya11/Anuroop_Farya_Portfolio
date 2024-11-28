@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:my_portfolio/core/routes/routes.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
 import 'package:my_portfolio/models/link.dart';
@@ -26,14 +28,20 @@ class ProjectModel {
     this.links,
   });
 
-  static List<ProjectModel> projects =
-  [
+  factory ProjectModel.fromJson(Map<String, dynamic> json) {
+    return ProjectModel(
+        project: json['project']??"Project",
+        title: json['title']??"App",
+        description: json['description']??"This is an amazing project.",
+        projectLink: json['projectLink'],
+        techUsed: TechnologyModel.jsonToList(json['techUsed']));
+  }
 
+  static List<ProjectModel> projects = [
     ProjectModel(
       project: "Flutter App",
       title: "KuChat",
-      description:
-      "My first Flutter project",
+      description: "My first Flutter project",
       appPhotos: AppConstants.smartStoreImage,
       projectLink: "https://github.com/AgnelSelvan/Smart-Store-Mobile-App",
       techUsed: [
@@ -45,9 +53,6 @@ class ProjectModel {
       ],
       buttonText: "Github Link",
     )
-
-
-
   ];
 
 /*  static List<ProjectModel> projects = [
