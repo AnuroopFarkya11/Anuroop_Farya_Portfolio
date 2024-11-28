@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_portfolio/core/logger/logger.dart';
 import 'package:my_portfolio/models/header_item.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
 import 'package:my_portfolio/core/utils/utils.dart';
@@ -12,6 +13,7 @@ import '../core/service/api_service/api_service.dart';
 final homeProvider = ChangeNotifierProvider((ref) => HomeProvider());
 
 class HomeProvider extends ChangeNotifier {
+  final _logger = Logger("HomeProvider");
   final contactKey = GlobalKey();
   final portfolioKey = GlobalKey();
   final servicesKey = GlobalKey();
@@ -71,12 +73,13 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> fetchReadme() async {
-    final url = 'https://api.github.com/repos/AnuroopFarkya11/KuChat_ChatApp/readme';
+    final url = 'https://raw.githubusercontent.com/AnuroopFarkya11/KuChat_ChatApp/refs/heads/master/details.json';
     final response = await DioClient(dio: dio).get(url);
 
     if (response.isSuccess) {
       final data = response.data;
-      final contentBase64 = data['content'];
+      _logger.log(data);
+   /*   final contentBase64 = data['content'];
       final sanitizedBase64 = contentBase64.replaceAll(RegExp(r'\s'), '');
       try{
         final decodedContent = utf8.decode(base64.decode(sanitizedBase64));
@@ -86,7 +89,7 @@ class HomeProvider extends ChangeNotifier {
       catch(e)
       {
         print("$e");
-      }
+      }*/
 
     } else {
       print("Failed to retrieve");
