@@ -35,6 +35,7 @@ class ProjectModel {
         description: json['description']??"This is an amazing project.",
         projectLink: json['projectLink'],
         appPhotos: json['appPhotos'],
+        buttonText : json['buttonText'],
         techUsed: TechnologyModel.jsonToList(json['techUsed']));
   }
 
