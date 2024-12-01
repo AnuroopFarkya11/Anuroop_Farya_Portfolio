@@ -20,6 +20,7 @@ import 'package:my_portfolio/pages/home/components/project.dart';
 import 'package:my_portfolio/pages/home/components/service.dart';
 import 'package:my_portfolio/provider/amplitutde.dart';
 import 'package:my_portfolio/provider/home.dart';
+import 'package:my_portfolio/provider/project.dart';
 import 'package:my_portfolio/provider/theme.dart';
 import 'package:my_portfolio/widgets/switch.dart';
 
@@ -33,6 +34,7 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home>
     with SingleTickerProviderStateMixin {
   late HomeProvider _homeProvider;
+
   // late AmplitutdeProvider _amplitutdeProvider;
   final ScrollController scrollController = ScrollController();
 
@@ -50,8 +52,9 @@ class _HomeState extends ConsumerState<Home>
     super.initState();
   }
 
-
   Widget _buildPage() {
+    final projectAsyncValue = ref.watch(projectProvider);
+
     return Stack(
       children: [
         ScrollConfiguration(
@@ -73,7 +76,11 @@ class _HomeState extends ConsumerState<Home>
                 AboutSection(
                   key: _homeProvider.aboutKey,
                 ),
-                ScreenHelper.isDesktop(context)?const SizedBox(height: 50,):const SizedBox.shrink(),
+                ScreenHelper.isDesktop(context)
+                    ? const SizedBox(
+                        height: 50,
+                      )
+                    : const SizedBox.shrink(),
                 ServiceSection(
                   key: _homeProvider.servicesKey,
                 ),
@@ -140,9 +147,15 @@ class _HomeState extends ConsumerState<Home>
                     )
                   ],
                 )),
-                ProjectSection(
-                  projects: ProjectModel.projects.take(4).toList(),
-                ),
+                projectAsyncValue.when(data: (List<ProjectModel> projects) {
+                  return ProjectSection(
+                    projects: projects.take(4).toList(),
+                  );
+                }, error: (e, s) {
+                  return const SizedBox.shrink();
+                }, loading: () {
+                  return const SizedBox.shrink();
+                }),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 28.0),
                   child: PortfolioStats(),
