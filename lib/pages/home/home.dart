@@ -42,7 +42,6 @@ class _HomeState extends ConsumerState<Home>
     // _amplitutdeProvider = ref.read(amplitudeProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await _homeProvider.fetchReadme();
       /*Timer(const Duration(seconds: 2), () async {
         // _amplitutdeProvider.logStartupEvent();
         // await _amplitutdeProvider.logAScreen("home");

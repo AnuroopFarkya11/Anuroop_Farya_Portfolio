@@ -13,6 +13,10 @@ import '../core/service/api_service/api_service.dart';
 
 final homeProvider = ChangeNotifierProvider((ref) => HomeProvider());
 
+
+
+
+
 class HomeProvider extends ChangeNotifier {
   final _logger = Logger("HomeProvider");
   final contactKey = GlobalKey();
@@ -73,36 +77,5 @@ class HomeProvider extends ChangeNotifier {
     }*/
   }
 
-  Future<void> fetchReadme() async {
-    final url = 'https://raw.githubusercontent.com/AnuroopFarkya11/KuChat_ChatApp/refs/heads/master/details.json';
-    final response = await DioClient(dio: dio).get(url);
-
-    if (response.isSuccess) {
-      final data = response.data;
-      _logger.log(data);
-      try
-      {
-        ProjectModel model = ProjectModel.fromJson(jsonDecode(data));
-      }
-      catch(e,s)
-      {
-        _logger.log(e.toString() + s.toString());
-      }
-   /*   final contentBase64 = data['content'];
-      final sanitizedBase64 = contentBase64.replaceAll(RegExp(r'\s'), '');
-      try{
-        final decodedContent = utf8.decode(base64.decode(sanitizedBase64));
-        print("Decoded" + decodedContent);
-
-      }
-      catch(e)
-      {
-        print("$e");
-      }*/
-
-    } else {
-      print("Failed to retrieve");
-    }
-  }
 
 }
