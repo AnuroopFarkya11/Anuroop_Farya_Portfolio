@@ -66,10 +66,12 @@ class ProjectSection extends StatelessWidget {
                         width: ScreenHelper.isMobile(context)
                             ? width * 0.9
                             : width * 0.46,
-                        child: Image.asset(
+                        child: Image.network(
                           projectModel.appPhotos!,
                           width: constraints.maxWidth > 720.0 ? null : 350.0,
                           height: 250,
+                          headers: {'Cookie':'_gh_sess=foKLntgfZF1%2F6xRw4fPPTnToZS7whJOBSDZD3mIBz28TatQSrzc5JwAMG2SPBoFXn4KSU6hhJqK%2FewdJKVrDyKgEviIyCpSdjdKkCJ5BdiUk2BU%2F9jFkRKt23d6NEYDCoLlG1om28K8bS6nmOdjE4vDtSG0xRurK8vLi0eeION%2BPZW%2FHRZcKhv%2FCSVqjz7R4fqqNEpeZr2p4EzxOmwudhJDrtmmaldJ0EVgoQn0mBed3%2FaFB4RDspIKANpntk%2FJ9VDc7SqzI3DrsXbrx0QF7BQ%3D%3D--tfjJ8QKPPpHgPJKu--Cmy%2BSFLHTQPXi1apzT8q%2Bg%3D%3D; _octo=GH1.1.317663603.1732595661; logged_in=no'},
+
                         ),
                       ),
 

@@ -33,9 +33,9 @@ class DioClient {
   }
 
   Future<ApiResponse<T>> get<T>(String endPoint,
-      {Map<String, dynamic>? queryParameter}) async {
+      {Map<String, dynamic>? queryParameter, Options? option}) async {
     return await _sendRequest<T>(
-        () => _dio.get(endPoint, queryParameters: queryParameter));
+        () => _dio.get(endPoint, queryParameters: queryParameter,options: option));
   }
 
   Future<ApiResponse<T>> post<T>(String endPoint, {dynamic data}) async {

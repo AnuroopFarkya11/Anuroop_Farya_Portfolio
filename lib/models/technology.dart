@@ -41,6 +41,7 @@ class TechnologyConstants {
 
   static List<TechnologyModel> technologyLearned = [
     flutter,
+    firebase,
     swift,
     cPlus,
     python,
