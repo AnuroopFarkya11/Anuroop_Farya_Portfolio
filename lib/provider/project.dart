@@ -17,7 +17,8 @@ final projectProvider = FutureProvider<List<ProjectModel>>((ref) async {
 
 Future<List<ProjectModel>> fetchReadme(DioClient dioClient) async {
   List<ProjectModel> projects = [];
-  const url = 'https://raw.githubusercontent.com/AnuroopFarkya11/Anuroop_Farya_Portfolio/refs/heads/main/projects_details';
+  const url = 'https://raw.githubusercontent.com/AnuroopFarkya11/Anuroop_Farya_Portfolio/refs/heads/main/projects_details.json';
+  //https://raw.githubusercontent.com/AnuroopFarkya11/Anuroop_Farya_Portfolio/refs/heads/main/projects_details.json
 
   final response = await dioClient.get(url);
   if (response.isSuccess) {
