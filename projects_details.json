@@ -1,13 +1,23 @@
 [
-{
-  "project" : "Flutter App",
-  "title" : "KuChat",
-  "description" : "My First Flutter Project.",
-  "projectLink" : "https://github.com/AnuroopFarkya11/KuChat_ChatApp",
-  "appPhotos": "https://raw.githubusercontent.com/AnuroopFarkya11/KuChat_ChatApp/refs/heads/master/KuchatApp.png",
-  "buttonText": "Github Link",
-  "techUsed" : ["Flutter","Firebase"]
-}
-
-
+  {
+    "project": "Flutter App",
+    "title": "KuChat",
+    "description": "My First Flutter Project.",
+    "projectLink": "https://github.com/AnuroopFarkya11/KuChat_ChatApp",
+    "appPhotos": "https://raw.githubusercontent.com/AnuroopFarkya11/KuChat_ChatApp/refs/heads/master/KuchatApp.png",
+    "buttonText": "Github Link",
+    "techUsed": [
+      "Flutter",
+      "Firebase"
+    ]
+  },
+  {
+    "project" : "Flutter App",
+    "title" : "NewsPulse",
+    "description" : "Beyond the Article: Dive into News Reels!",
+    "projectLink" : "https://github.com/AnuroopFarkya11/news_feed",
+    "appPhotos": "https://raw.githubusercontent.com/AnuroopFarkya11/news_feed/refs/heads/master/NewsFeed.png",
+    "buttonText": "Github Link",
+    "techUsed" : ["Flutter","Firebase"]
+  }
 ]
