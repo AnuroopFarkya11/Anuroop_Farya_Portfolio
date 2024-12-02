@@ -5,6 +5,7 @@ import 'package:my_portfolio/models/project.dart';
 import 'package:my_portfolio/pages/home/components/footer.dart';
 import 'package:my_portfolio/pages/works/components/work_section.dart';
 import 'package:my_portfolio/core/utils/screen_helper.dart';
+import 'package:my_portfolio/provider/project.dart';
 import 'package:my_portfolio/widgets/header.dart';
 
 class MyWorksScreen extends ConsumerStatefulWidget {
@@ -23,6 +24,8 @@ class _DemoScreenState extends ConsumerState<MyWorksScreen> {
   }
 
   Widget _buildPage() {
+
+    final projectAsyncValue = ref.watch(projectProvider);
     return Stack(
       children: [
         ScrollConfiguration(
@@ -65,12 +68,16 @@ class _DemoScreenState extends ConsumerState<MyWorksScreen> {
                     )
                   ],
                 )),
-                Visibility(
+                projectAsyncValue.when(data: (List<ProjectModel> projects) {
+                  return WorkSection(
+                    projects: projects,
+                  );
+                }, error: (e, s) {
+                  return const SizedBox.shrink();
+                }, loading: () {
+                  return const SizedBox.shrink();
+                }),
 
-                  child: WorkSection(
-                    projects: ProjectModel.projects,
-                  ),
-                ),
                 const Footer()
               ],
             ),

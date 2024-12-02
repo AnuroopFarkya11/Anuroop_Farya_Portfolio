@@ -58,7 +58,7 @@ class WorkSection extends StatelessWidget {
                 direction: Axis.vertical,
                 children: [
                   if (projectModel.appPhotos != null)
-                    Image.asset(
+                    Image.network(
                       projectModel.appPhotos!,
                       width: constraints.maxWidth > 720.0 ? null : 350.0,
                       height: 250,
