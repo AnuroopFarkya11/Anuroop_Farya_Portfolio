@@ -29,29 +29,3 @@
     "buttonText": "Github Link",
     "techUsed" : ["Flutter","Firebase"]
   },
-
-  {
-    "project" : "Full-Stack Application",
-    "title" : "DabbaMate",
-    "description" : "Order your Dabba now!!",
-    "projectLink" : "https://github.com/AnuroopFarkya11/vrindwan_tiffin",
-    "appPhotos": "https://raw.githubusercontent.com/AnuroopFarkya11/vrindwan_tiffin/refs/heads/main/lib/output/DabbaMate.png",
-    "buttonText": "Github Link",
-    "techUsed" : ["Flutter","SpringBoot","MongoDB"]
-  },
-
-  {
-    "project" : "Flutter Web-App",
-    "title" : "Drawing Tool",
-    "description" : "Laptops and Tablets Only – Because Creativity Deserves Space.",
-    "projectLink" : "https://anuroopfarkya11.github.io/drawingtool/#/home",
-    "appPhotos": "https://raw.githubusercontent.com/AnuroopFarkya11/drawingtool/refs/heads/main/Drawingtool.png",
-    "buttonText": "Explore",
-    "techUsed" : ["Flutter"]
-  }
-
-
-  
-
-  
-]
