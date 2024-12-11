@@ -8,6 +8,7 @@ import 'package:my_portfolio/core/utils/globals.dart';
 import 'package:my_portfolio/core/utils/screen_helper.dart';
 import 'package:my_portfolio/core/utils/utils.dart';
 import 'package:my_portfolio/models/header_item.dart';
+import 'package:my_portfolio/pages/super/super_user_auth_dialog.dart';
 import 'package:my_portfolio/provider/home.dart';
 import 'package:my_portfolio/provider/theme.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -25,6 +26,9 @@ class HeaderLogo extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               context.goNamed(Routes.initial);
+            },
+            onLongPress: (){
+              showSuperUserDialog(context);
             },
             child: RichText(
               text: TextSpan(
