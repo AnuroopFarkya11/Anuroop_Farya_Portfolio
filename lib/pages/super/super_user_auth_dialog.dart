@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
-
-class SuperUserDialog extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_portfolio/provider/super.dart';
+class SuperUserDialog extends ConsumerStatefulWidget {
   const SuperUserDialog({Key? key}) : super(key: key);
 
   @override
-  State<SuperUserDialog> createState() => _SuperUserDialogState();
+  ConsumerState<SuperUserDialog> createState() => _SuperUserDialogState();
 }
 
-class _SuperUserDialogState extends State<SuperUserDialog> {
+class _SuperUserDialogState extends ConsumerState<SuperUserDialog> {
   final TextEditingController _passwordController = TextEditingController();
-  final String correctPassword = "SuperSecret"; // Replace with your actual password
   String? errorMessage;
   bool _isPasswordVisible = false;
 
   void _authenticate() {
-    setState(() {
-      if (_passwordController.text == correctPassword) {
-        Navigator.pop(context, true); // Close dialog and return success
-      } else {
-        errorMessage = "Incorrect password. Please try again.";
-      }
-    });
+    final notifier = ref.read(isSuperUserProvider.notifier);
+
+    try {
+      notifier.loginAsSuperUser(_passwordController.text);
+      Navigator.pop(context, true); // Close dialog and return success
+    } catch (e) {
+      setState(() {
+        errorMessage = e.toString().replaceAll('Exception:', '').trim();
+      });
+    }
   }
 
   @override
