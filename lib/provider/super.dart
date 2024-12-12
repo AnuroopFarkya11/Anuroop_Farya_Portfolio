@@ -1,10 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SuperUserNotifier extends StateNotifier<bool> {
   SuperUserNotifier() : super(false);
 
   void loginAsSuperUser(String password) {
-    if (password == 'SuperSecret') {
+    final superUserPassword = dotenv.env['SUPER_USER_PASSWORD'] ?? '';
+
+    if (password == superUserPassword) {
       state = true;
     } else {
       throw Exception('Invalid Password');
@@ -13,5 +16,6 @@ class SuperUserNotifier extends StateNotifier<bool> {
 
   void logout() => state = false;
 }
+
 
 final isSuperUserProvider = StateNotifierProvider<SuperUserNotifier, bool>((ref) => SuperUserNotifier());
