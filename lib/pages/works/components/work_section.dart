@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -201,7 +202,7 @@ class WorkSection extends ConsumerWidget {
                       child: IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          _showEditProjectDialog(context, projectModel);
+                          _showProjectDialog(context, projectModel: projectModel);
                         },
                       ),
                     ),
@@ -217,7 +218,7 @@ class WorkSection extends ConsumerWidget {
   Widget _buildAddProjectCard(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _showAddProjectDialog(context);
+        _showProjectDialog(context);
       },
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -232,7 +233,7 @@ class WorkSection extends ConsumerWidget {
                         ? const Color.fromARGB(75, 12, 12, 7)
                         : Colors.grey[100],
                     borderRadius: BorderRadius.circular(5),
-                    
+
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -263,49 +264,174 @@ class WorkSection extends ConsumerWidget {
     );
   }
 
-  void _showAddProjectDialog(BuildContext context) {
+  void _showProjectDialog(BuildContext context, {ProjectModel? projectModel}) {
+    // Create TextEditingController for each field
+    final TextEditingController projectController = TextEditingController(text: projectModel?.project ?? '');
+    final TextEditingController titleController = TextEditingController(text: projectModel?.title ?? '');
+    final TextEditingController descriptionController = TextEditingController(text: projectModel?.description ?? '');
+    final TextEditingController projectLinkController = TextEditingController(text: projectModel?.projectLink ?? '');
+    final TextEditingController buttonTextController = TextEditingController(text: projectModel?.buttonText ?? '');
+    final TextEditingController appPhotosController = TextEditingController(text: projectModel?.appPhotos ?? '');
+    final TextEditingController techUsedController = TextEditingController(text: projectModel?.techUsed.map((e)=>e.name).join(', ') ?? '');
+
+    // Photo selection variable
+    String? photoUrl;
+
+    // Show dialog
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Add New Project"),
-        content: const Text("Add project dialog content here."),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+      builder: (context) {
+        return AlertDialog(
+          title: Text(projectModel == null ? "Add New Project" : "Edit Project"),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Project name input
+                TextField(
+                  controller: projectController,
+                  decoration: const InputDecoration(labelText: 'Project Name'),
+                ),
+                const SizedBox(height: 10),
+                // Title input
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(labelText: 'Title'),
+                ),
+                const SizedBox(height: 10),
+                // Description input
+                TextField(
+                  controller: descriptionController,
+                  decoration: const InputDecoration(labelText: 'Description'),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 10),
+                // Project link input
+                TextField(
+                  controller: projectLinkController,
+                  decoration: const InputDecoration(labelText: 'Project Link (URL)'),
+                ),
+                const SizedBox(height: 10),
+                // Button text input
+                TextField(
+                  controller: buttonTextController,
+                  decoration: const InputDecoration(labelText: 'Button Text'),
+                ),
+                const SizedBox(height: 10),
+
+                // Modern photo upload box
+                GestureDetector(
+                  onTap: () async {
+                    // Open file picker to select a photo
+                    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                    if (result != null) {
+                      // If a file is picked, get the path of the file
+                      photoUrl = result.files.single.path;
+                      // Update the controller with the selected file path (or upload URL)
+                      appPhotosController.text = photoUrl ?? '';
+                    }
+                  },
+                  child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey[100],
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.photo_camera, size: 40, color: Colors.grey),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Add Photo',
+                            style: TextStyle(color: Colors.grey[600]),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Drag & Drop or Browse',
+                            style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // Technologies used input
+                TextField(
+                  controller: techUsedController,
+                  decoration: const InputDecoration(labelText: 'Technologies Used (comma separated)'),
+                ),
+              ],
+            ),
           ),
-          TextButton(
-            onPressed: () {
-              // Add project logic here
-              Navigator.pop(context);
-            },
-            child: const Text("Add"),
-          ),
-        ],
-      ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Gather the data from controllers and validate
+                final project = projectController.text;
+                final title = titleController.text;
+                final description = descriptionController.text;
+                final projectLink = projectLinkController.text;
+                final buttonText = buttonTextController.text;
+                final appPhotos = appPhotosController.text;
+                final techUsed = techUsedController.text.split(',').map((e) => e.trim()).toList();
+
+                if (project.isEmpty || title.isEmpty || description.isEmpty || projectLink.isEmpty) {
+                  // Basic validation to ensure required fields are filled
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Please fill in all required fields")),
+                  );
+                  return;
+                }
+
+                // Logic for adding or editing the project
+                if (projectModel == null) {
+                  // Add new project logic
+                  final newProject = {
+                    "project": project,
+                    "title": title,
+                    "description": description,
+                    "projectLink": projectLink,
+                    "appPhotos": appPhotos,
+                    "buttonText": buttonText,
+                    "techUsed": techUsed,
+                  };
+                  ProjectModel.fromJson(newProject);
+                  // Handle saving the new project (e.g., save to a database or list)
+                  print("Adding Project: $newProject");
+                } else {
+                  // Edit existing project logic
+                  final updatedProject = projectModel.copyWith(
+                    project: project,
+                    title: title,
+                    description: description,
+                    projectLink: projectLink,
+                    appPhotos: appPhotos,
+                    buttonText: buttonText,
+                    techUsed: techUsed,
+                  );
+                  // Handle saving the updated project (e.g., update in a database or list)
+                  print("Updating Project: $updatedProject");
+                }
+
+                Navigator.pop(context);
+              },
+              child: Text(projectModel == null ? "Add" : "Save"),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  void _showEditProjectDialog(BuildContext context, ProjectModel projectModel) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Edit Project"),
-        content: const Text("Edit project dialog content here."),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
-          ),
-          TextButton(
-            onPressed: () {
-              // Edit project logic here
-              Navigator.pop(context);
-            },
-            child: const Text("Save"),
-          ),
-        ],
-      ),
-    );
-  }
+
 }

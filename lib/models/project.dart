@@ -1,9 +1,8 @@
-import 'dart:convert';
 
-import 'package:my_portfolio/core/routes/routes.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
 import 'package:my_portfolio/models/link.dart';
 import 'package:my_portfolio/models/technology.dart';
+
 
 class ProjectModel {
   final String project;
@@ -30,32 +29,56 @@ class ProjectModel {
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
     return ProjectModel(
-        project: json['project']??"Project",
-        title: json['title']??"App",
-        description: json['description']??"This is an amazing project.",
-        projectLink: json['projectLink'],
-        appPhotos: json['appPhotos'],
-        buttonText : json['buttonText'],
-        techUsed: TechnologyModel.jsonToList(json['techUsed']));
+      project: json['project'] ?? "Project",
+      title: json['title'] ?? "App",
+      description: json['description'] ?? "This is an amazing project.",
+      projectLink: json['projectLink'],
+      appPhotos: json['appPhotos'],
+      buttonText: json['buttonText'],
+      techUsed: TechnologyModel.jsonToList(json['techUsed']),
+    );
   }
 
-  static List<ProjectModel> projects = [
+
+
+  // copyWith method
+  ProjectModel copyWith({
+    String? project,
+    String? title,
+    String? description,
+    String? appPhotos,
+    String? projectLink,
+    bool? internalLink,
+    List<String>? techUsed,
+    List<LinkModel>? links,
+    String? buttonText,
+  }) {
+    return ProjectModel(
+      project: project ?? this.project,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      appPhotos: appPhotos ?? this.appPhotos,
+      projectLink: projectLink ?? this.projectLink,
+      internalLink: internalLink ?? this.internalLink,
+      techUsed: TechnologyModel.jsonToList(techUsed??this.techUsed),
+      links: links ?? this.links,
+      buttonText: buttonText ?? this.buttonText,
+    );
+  }
+  static List<ProjectModel> demos = [
     ProjectModel(
       project: "Flutter App",
-      title: "KuChat",
-      description: "My first Flutter project",
-      appPhotos: AppConstants.smartStoreImage,
-      projectLink: "https://github.com/AgnelSelvan/Smart-Store-Mobile-App",
-      techUsed: [
-        TechnologyConstants.flutter,
-        TechnologyConstants.firebase,
-        TechnologyConstants.flask,
-        TechnologyConstants.python,
-        TechnologyConstants.razorPay
-      ],
+      title: "Flutter Web Portfolio",
+      description: "",
+      appPhotos: AppConstants.portfolioGif,
+      projectLink: "https://github.com/AgnelSelvan/Flutter-Web-Portfolio",
+      techUsed: [],
       buttonText: "Github Link",
-    )
+    ),
   ];
+}
+
+
 
 /*  static List<ProjectModel> projects = [
     ProjectModel(
@@ -182,15 +205,3 @@ class ProjectModel {
     ),
   ];*/
 
-  static List<ProjectModel> demos = [
-    ProjectModel(
-      project: "Flutter App",
-      title: "Flutter Web Portfolio",
-      description: "",
-      appPhotos: AppConstants.portfolioGif,
-      projectLink: "https://github.com/AgnelSelvan/Flutter-Web-Portfolio",
-      techUsed: [],
-      buttonText: "Github Link",
-    ),
-  ];
-}
