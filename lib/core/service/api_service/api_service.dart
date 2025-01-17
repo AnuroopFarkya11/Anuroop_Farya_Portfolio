@@ -31,7 +31,7 @@ class DioClient {
       LoggingInterceptor(),
     ]);
   }
-
+//hi
   Future<ApiResponse<T>> get<T>(String endPoint,
       {Map<String, dynamic>? queryParameter, Options? option}) async {
     return await _sendRequest<T>(
