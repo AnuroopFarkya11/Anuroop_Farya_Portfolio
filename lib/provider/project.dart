@@ -10,8 +10,8 @@ Logger _logger = Logger("Project Provider");
 
 final projectProvider = FutureProvider<List<ProjectModel>>((ref) async {
   var dioClient = ref.watch(dioClientProvider);
-  // List<ProjectModel> list = await fetchReadme(dioClient);
-  List<ProjectModel> list = await fetchReadme2(dioClient);
+  List<ProjectModel> list = await fetchReadme(dioClient);
+  // List<ProjectModel> list = await fetchReadme2(dioClient);
   _logger.log("Projects" + list.toString());
   return list;
 });
