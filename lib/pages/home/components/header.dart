@@ -28,7 +28,7 @@ class HeaderLogo extends StatelessWidget {
               context.goNamed(Routes.initial);
             },
             onLongPress: (){
-              showSuperUserDialog(context);
+              // showSuperUserDialog(context);
             },
             child: RichText(
               text: TextSpan(

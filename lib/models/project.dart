@@ -1,8 +1,6 @@
-
 import 'package:my_portfolio/core/utils/constants.dart';
 import 'package:my_portfolio/models/link.dart';
 import 'package:my_portfolio/models/technology.dart';
-
 
 class ProjectModel {
   final String project;
@@ -12,34 +10,34 @@ class ProjectModel {
   final String projectLink;
   final bool internalLink;
   final List<TechnologyModel> techUsed;
+  final List<String>? techUsedIconUrl;
   List<LinkModel>? links = [];
   final String? buttonText;
 
-  ProjectModel({
-    required this.project,
-    required this.title,
-    required this.description,
-    this.appPhotos,
-    required this.projectLink,
-    this.internalLink = false,
-    required this.techUsed,
-    this.buttonText,
-    this.links,
-  });
+  ProjectModel(
+      {required this.project,
+      required this.title,
+      required this.description,
+      this.appPhotos,
+      required this.projectLink,
+      this.internalLink = false,
+      required this.techUsed,
+      this.buttonText,
+      this.links,
+      this.techUsedIconUrl});
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) {
     return ProjectModel(
-      project: json['project'] ?? "Project",
-      title: json['title'] ?? "App",
-      description: json['description'] ?? "This is an amazing project.",
-      projectLink: json['projectLink'],
-      appPhotos: json['appPhotos'],
-      buttonText: json['buttonText'],
-      techUsed: TechnologyModel.jsonToList(json['techUsed']),
+        project: json['project'] ?? "Project",
+        title: json['title'] ?? "App",
+        description: json['description'] ?? "This is an amazing project.",
+        projectLink: json['projectLink'],
+        appPhotos: json['appPhotos'],
+        buttonText: json['buttonText'],
+        techUsed: TechnologyModel.jsonToList(json['techUsed']),
+        techUsedIconUrl: json['techUsedIconUrl']!=null?List<String>.from(json['techUsedIconUrl']):[]
     );
   }
-
-
 
   // copyWith method
   ProjectModel copyWith({
@@ -50,6 +48,7 @@ class ProjectModel {
     String? projectLink,
     bool? internalLink,
     List<String>? techUsed,
+    List<String>? techUsedIconUrl,
     List<LinkModel>? links,
     String? buttonText,
   }) {
@@ -60,11 +59,13 @@ class ProjectModel {
       appPhotos: appPhotos ?? this.appPhotos,
       projectLink: projectLink ?? this.projectLink,
       internalLink: internalLink ?? this.internalLink,
-      techUsed: TechnologyModel.jsonToList(techUsed??this.techUsed),
+      techUsed: TechnologyModel.jsonToList(techUsed ?? this.techUsed),
       links: links ?? this.links,
       buttonText: buttonText ?? this.buttonText,
+      techUsedIconUrl: techUsedIconUrl??this.techUsedIconUrl
     );
   }
+
   static List<ProjectModel> demos = [
     ProjectModel(
       project: "Flutter App",
@@ -77,8 +78,6 @@ class ProjectModel {
     ),
   ];
 }
-
-
 
 /*  static List<ProjectModel> projects = [
     ProjectModel(
@@ -204,4 +203,3 @@ class ProjectModel {
       ],
     ),
   ];*/
-

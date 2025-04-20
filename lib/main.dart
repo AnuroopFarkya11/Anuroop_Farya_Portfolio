@@ -10,6 +10,6 @@ void configureApp() {
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   // usePathUrlStrategy();
-  await dotenv.load();
+  // await dotenv.load();
   runApp(const ProviderScope(child: MyApp()));
 }

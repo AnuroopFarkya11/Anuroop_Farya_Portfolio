@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
@@ -38,12 +39,12 @@ class WorkSection extends ConsumerWidget {
         child: Wrap(
           children: [
             ...projects.map((e) => Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 15,
-              ),
-              child: _buildProject(context, e, isSuperUser),
-            )),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 15,
+                  ),
+                  child: _buildProject(context, e, isSuperUser),
+                )),
             if (isSuperUser) // Add button visible only to super users
               Container(
                 margin: const EdgeInsets.symmetric(
@@ -58,7 +59,8 @@ class WorkSection extends ConsumerWidget {
     );
   }
 
-  Widget _buildProject(BuildContext context, ProjectModel projectModel, bool isSuperUser) {
+  Widget _buildProject(
+      BuildContext context, ProjectModel projectModel, bool isSuperUser) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
@@ -125,29 +127,40 @@ class WorkSection extends ConsumerWidget {
                             const SizedBox(
                               height: 20.0,
                             ),
-                            projectModel.techUsed.isEmpty
+                            false
                                 ? Container()
                                 : Text(
-                              "Technologies Used",
-                              style: GoogleFonts.josefinSans(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            Wrap(
-                              children: projectModel.techUsed
-                                  .map((e) => Container(
-                                margin: const EdgeInsets.all(10),
-                                width: 25,
-                                color:
-                                e.logo == AppConstants.razorPayImage
-                                    ? Colors.white
-                                    : null,
-                                height: 25,
-                                child: Image.asset(e.logo),
-                              ))
-                                  .toList(),
-                            ),
+                                    "Technologies Used",
+                                    style: GoogleFonts.josefinSans(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                            projectModel.techUsed.isNotEmpty
+                                ? Wrap(
+                                    children: projectModel.techUsed
+                                        .map((e) => Container(
+                                              margin: const EdgeInsets.all(10),
+                                              width: 25,
+                                              color: e.logo ==
+                                                      AppConstants.razorPayImage
+                                                  ? Colors.white
+                                                  : null,
+                                              height: 25,
+                                              child: Image.asset(e.logo),
+                                            ))
+                                        .toList(),
+                                  )
+                                : Wrap(
+                                    children: projectModel.techUsedIconUrl!
+                                        .map((e) => Container(
+                                              margin: const EdgeInsets.all(10),
+                                              width: 25,
+                                              height: 25,
+                                              child: SvgPicture.network(e,fit: BoxFit.fill,),
+                                            ))
+                                        .toList(),
+                                  ),
                             const SizedBox(
                               height: 25.0,
                             ),
@@ -160,14 +173,14 @@ class WorkSection extends ConsumerWidget {
                                     child: ElevatedButton(
                                       style: const ButtonStyle(
                                         backgroundColor:
-                                        MaterialStatePropertyAll(
+                                            MaterialStatePropertyAll(
                                           kPrimaryColor,
                                         ),
                                       ),
                                       onPressed: () {
                                         if (projectModel.internalLink) {
-                                          context
-                                              .goNamed(projectModel.projectLink);
+                                          context.goNamed(
+                                              projectModel.projectLink);
                                         } else {
                                           Utilty.openUrl(
                                               projectModel.projectLink);
@@ -176,7 +189,7 @@ class WorkSection extends ConsumerWidget {
                                       child: Center(
                                         child: Text(
                                           (projectModel.buttonText ??
-                                              "Explore MORE")
+                                                  "Explore MORE")
                                               .toUpperCase(),
                                           style: TextStyle(
                                             fontSize: 13.0,
@@ -202,7 +215,8 @@ class WorkSection extends ConsumerWidget {
                       child: IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          _showProjectDialog(context, projectModel: projectModel);
+                          _showProjectDialog(context,
+                              projectModel: projectModel);
                         },
                       ),
                     ),
@@ -226,14 +240,13 @@ class WorkSection extends ConsumerWidget {
             width: 400,
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                return  Container(
+                return Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: ref.watch(themeProvider).isDarkMode
                         ? const Color.fromARGB(75, 12, 12, 7)
                         : Colors.grey[100],
                     borderRadius: BorderRadius.circular(5),
-
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -256,7 +269,6 @@ class WorkSection extends ConsumerWidget {
                   ),
                 );
               },
-
             ),
           );
         },
@@ -266,13 +278,20 @@ class WorkSection extends ConsumerWidget {
 
   void _showProjectDialog(BuildContext context, {ProjectModel? projectModel}) {
     // Create TextEditingController for each field
-    final TextEditingController projectController = TextEditingController(text: projectModel?.project ?? '');
-    final TextEditingController titleController = TextEditingController(text: projectModel?.title ?? '');
-    final TextEditingController descriptionController = TextEditingController(text: projectModel?.description ?? '');
-    final TextEditingController projectLinkController = TextEditingController(text: projectModel?.projectLink ?? '');
-    final TextEditingController buttonTextController = TextEditingController(text: projectModel?.buttonText ?? '');
-    final TextEditingController appPhotosController = TextEditingController(text: projectModel?.appPhotos ?? '');
-    final TextEditingController techUsedController = TextEditingController(text: projectModel?.techUsed.map((e)=>e.name).join(', ') ?? '');
+    final TextEditingController projectController =
+        TextEditingController(text: projectModel?.project ?? '');
+    final TextEditingController titleController =
+        TextEditingController(text: projectModel?.title ?? '');
+    final TextEditingController descriptionController =
+        TextEditingController(text: projectModel?.description ?? '');
+    final TextEditingController projectLinkController =
+        TextEditingController(text: projectModel?.projectLink ?? '');
+    final TextEditingController buttonTextController =
+        TextEditingController(text: projectModel?.buttonText ?? '');
+    final TextEditingController appPhotosController =
+        TextEditingController(text: projectModel?.appPhotos ?? '');
+    final TextEditingController techUsedController = TextEditingController(
+        text: projectModel?.techUsed.map((e) => e.name).join(', ') ?? '');
 
     // Photo selection variable
     String? photoUrl;
@@ -282,7 +301,8 @@ class WorkSection extends ConsumerWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(projectModel == null ? "Add New Project" : "Edit Project"),
+          title:
+              Text(projectModel == null ? "Add New Project" : "Edit Project"),
           content: SingleChildScrollView(
             child: Column(
               children: [
@@ -308,7 +328,8 @@ class WorkSection extends ConsumerWidget {
                 // Project link input
                 TextField(
                   controller: projectLinkController,
-                  decoration: const InputDecoration(labelText: 'Project Link (URL)'),
+                  decoration:
+                      const InputDecoration(labelText: 'Project Link (URL)'),
                 ),
                 const SizedBox(height: 10),
                 // Button text input
@@ -322,7 +343,8 @@ class WorkSection extends ConsumerWidget {
                 GestureDetector(
                   onTap: () async {
                     // Open file picker to select a photo
-                    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                    FilePickerResult? result = await FilePicker.platform
+                        .pickFiles(type: FileType.image);
                     if (result != null) {
                       // If a file is picked, get the path of the file
                       photoUrl = result.files.single.path;
@@ -342,7 +364,8 @@ class WorkSection extends ConsumerWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.photo_camera, size: 40, color: Colors.grey),
+                          Icon(Icons.photo_camera,
+                              size: 40, color: Colors.grey),
                           const SizedBox(height: 8),
                           Text(
                             'Add Photo',
@@ -351,7 +374,8 @@ class WorkSection extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Text(
                             'Drag & Drop or Browse',
-                            style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                            style: TextStyle(
+                                color: Colors.grey[400], fontSize: 12),
                           ),
                         ],
                       ),
@@ -362,7 +386,8 @@ class WorkSection extends ConsumerWidget {
                 // Technologies used input
                 TextField(
                   controller: techUsedController,
-                  decoration: const InputDecoration(labelText: 'Technologies Used (comma separated)'),
+                  decoration: const InputDecoration(
+                      labelText: 'Technologies Used (comma separated)'),
                 ),
               ],
             ),
@@ -383,12 +408,19 @@ class WorkSection extends ConsumerWidget {
                 final projectLink = projectLinkController.text;
                 final buttonText = buttonTextController.text;
                 final appPhotos = appPhotosController.text;
-                final techUsed = techUsedController.text.split(',').map((e) => e.trim()).toList();
+                final techUsed = techUsedController.text
+                    .split(',')
+                    .map((e) => e.trim())
+                    .toList();
 
-                if (project.isEmpty || title.isEmpty || description.isEmpty || projectLink.isEmpty) {
+                if (project.isEmpty ||
+                    title.isEmpty ||
+                    description.isEmpty ||
+                    projectLink.isEmpty) {
                   // Basic validation to ensure required fields are filled
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Please fill in all required fields")),
+                    const SnackBar(
+                        content: Text("Please fill in all required fields")),
                   );
                   return;
                 }
@@ -432,6 +464,4 @@ class WorkSection extends ConsumerWidget {
       },
     );
   }
-
-
 }

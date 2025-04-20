@@ -5,13 +5,14 @@ class SuperUserNotifier extends StateNotifier<bool> {
   SuperUserNotifier() : super(false);
 
   void loginAsSuperUser(String password) {
-    final superUserPassword = dotenv.env['SUPER_USER_PASSWORD'] ?? '';
+    // final superUserPassword = dotenv.env['SUPER_USER_PASSWORD'] ?? '';
+    // final superUserPassword = "Hanumanji" ?? '';
 
-    if (password == superUserPassword) {
-      state = true;
-    } else {
-      throw Exception('Invalid Password');
-    }
+    // if (password == superUserPassword) {
+    //   state = true;
+    // } else {
+    //   throw Exception('Invalid Password');
+    // }
   }
 
   void logout() => state = false;
