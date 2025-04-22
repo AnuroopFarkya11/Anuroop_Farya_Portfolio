@@ -71,5 +71,19 @@
          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
       ]
+   },
+   {
+      "project": "Spring Boot Application",
+      "title": "DabbaMate Backend",
+      "description": "Backend Engineered for Fast & Reliable Food Management.",
+      "projectLink": "https://github.com/AnuroopFarkya11/Vrindawan-tiffin-SpringBoot",
+      "appPhotos": "https://raw.githubusercontent.com/AnuroopFarkya11/Vrindawan-tiffin-SpringBoot/refs/heads/main/Dabbamate_Backend.png",
+      "buttonText": "Github Link",
+      "techUsed": [],
+      "techUsedIconUrl": [
+         "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
+         "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+         "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg"
+      ]
    }
 ]
